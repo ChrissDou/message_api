@@ -1,0 +1,60 @@
+{
+	"info": {
+		"_postman_id": "b627f5c4-2e01-48e0-b09a-dff2622e3d86",
+		"name": "Messages API Collection",
+		"description": "Postman collection for testing Messages API (CakePHP)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43576043",
+		"_collection_link": "https://boxuanchen.postman.co/workspace/BoxuanChen's-Workspace~14f3892a-9fa2-444a-8174-aa709950eefb/collection/43576043-b627f5c4-2e01-48e0-b09a-dff2622e3d86?action=share&source=collection_link&creator=43576043"
+	},
+	"item": [
+		{
+			"name": "Get All Messages",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8765/messages",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"messages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post a New Message",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"Chris\",\n    \"message\": \"Hello world!\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8765/messages/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"messages",
+						"add"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,53 +1,83 @@
-# CakePHP Application Skeleton
+# Task 2: Message Board API (CakePHP 5.x)
 
-![Build Status](https://github.com/cakephp/app/actions/workflows/ci.yml/badge.svg?branch=5.x)
-[![Total Downloads](https://img.shields.io/packagist/dt/cakephp/app.svg?style=flat-square)](https://packagist.org/packages/cakephp/app)
-[![PHPStan](https://img.shields.io/badge/PHPStan-level%208-brightgreen.svg?style=flat-square)](https://github.com/phpstan/phpstan)
+This is a simple message board API built with CakePHP.  
+Users can submit and view messages. All data is stored in a MySQL database and returned as JSON responses.
 
-A skeleton for creating applications with [CakePHP](https://cakephp.org) 5.x.
+---
 
-The framework source code can be found here: [cakephp/cakephp](https://github.com/cakephp/cakephp).
+## 📚 Features
 
-## Installation
+- RESTful API with CakePHP 5.x
+- JSON responses in unified format: `{ success: true/false, data: ... }`
+- Uses classes to encapsulate data and logic (`MessagesController`, `MessagesTable`, `Message Entity`)
+- Supports field validation (e.g. message required, username max 20 chars, message max 200 chars)
+- Supports pagination via `?page=1&limit=5`
+- Designed for API use (no HTML templates required)
+- Data stored in MySQL (can also adapt to JSON file, array, or SQLite)
 
-1. Download [Composer](https://getcomposer.org/doc/00-intro.md) or update `composer self-update`.
-2. Run `php composer.phar create-project --prefer-dist cakephp/app [app_name]`.
+---
 
-If Composer is installed globally, run
+## 📦 Technologies Used
 
-```bash
-composer create-project --prefer-dist cakephp/app
+- Language: PHP
+- Framework: CakePHP 5.x
+- Database: MySQL
+- Dev Tools: Composer, Postman
+
+---
+
+## ⚙️ Installation & Setup
+
+1. Make sure you have [Composer](https://getcomposer.org/) installed.
+2. Clone or extract this project to your web root.
+3. Run:
+   ```bash
+   composer install
+   bin/cake server -p 8765
+4. Access the API at: http://localhost:8765/messages
+
+🗃️ Database Setup
+Import this table using phpMyAdmin or run the SQL below:
+```sql
+CREATE TABLE messages (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(20) NOT NULL,
+  message TEXT NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
 ```
+Then configure config/app_local.php for your database settings:
+```php
 
-In case you want to use a custom app dir name (e.g. `/myapp/`):
-
-```bash
-composer create-project --prefer-dist cakephp/app myapp
+'Datasources' => [
+    'default' => [
+        'host' => 'localhost',
+        'username' => 'your_username',
+        'password' => 'your_password',
+        'database' => 'your_database_name',
+        'driver' => 'Cake\Database\Driver\Mysql',
+        ...
+    ]
+]
 ```
-
-You can now either use your machine's webserver to view the default home page, or start
-up the built-in webserver with:
-
+📚 API Endpoints
 ```bash
-bin/cake server -p 8765
+Method        	Endpoint	                Description
+GET	            /books	                    Get all messages
+POST	        /books/add                	Add a new message
 ```
+✅ Validation Rules
+username:
+Required
+Max length: 20 characters
 
-Then visit `http://localhost:8765` to see the welcome page.
+message:
+Required
+Max length: 200 characters
 
-## Update
+📥 Postman Collection
+A Postman collection file is included:
+📁 Messages API Collection.postman_collection
 
-Since this skeleton is a starting point for your application and various files
-would have been modified as per your needs, there isn't a way to provide
-automated upgrades, so you have to do any updates manually.
-
-## Configuration
-
-Read and edit the environment specific `config/app_local.php` and set up the
-`'Datasources'` and any other configuration relevant for your application.
-Other environment agnostic settings can be changed in `config/app.php`.
-
-## Layout
-
-The app skeleton uses [Milligram](https://milligram.io/) (v1.3) minimalist CSS
-framework by default. You can, however, replace it with any other library or
-custom styles.
+🙋 Author
+Developed by: Boxuan Chen (陈博轩)
